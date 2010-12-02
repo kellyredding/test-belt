@@ -29,8 +29,6 @@ Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
 
-SimpleGem::TestTasks.new
-
 desc 'Generate the gemspec for this gem'
 task :gemspec do
   file = File.dirname(__FILE__) + "/#{spec.name}.gemspec"
@@ -39,4 +37,7 @@ task :gemspec do
 end
 
 task :default => :gem
+
+require 'lib/test_it/rake_tasks'
+TestIt::RakeTasks.new
 

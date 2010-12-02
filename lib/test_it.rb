@@ -1,1 +1,2 @@
-# require 'test_it/...'
+module TestIt
+end

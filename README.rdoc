@@ -47,13 +47,15 @@ you get these niceties for free
 https://github.com/thoughtbot/shoulda
 
 === Shoulda enhancements
-I've added some handy extensions to some things shoulda does.  None of these are required so just use them as you see fit.
+I've added some handy extensions to some things Shoulda does.  None of these are required so just use them as you see fit.
 
 
 == Rake tasks for running tests
 TestIt can provide an automatic set of rake tasks for testing subsets of your code base.  These tasks are defined based on the structure of your test files.  To use this first add this to your Rakefile:
-    # this assumes your test files are located in /test
-    TestIt::RakeTasks.new
+
+    require 'rubygems'
+    require 'test_it/rake_tasks'
+    TestIt::RakeTasks.new      # this assumes your test files are located in /test
 
 Now to see what this gives you:
 
