@@ -1,0 +1,5 @@
+require 'rubygems'
+require 'test/unit'
+require 'leftright'
+require 'shoulda'
+require 'useful/shoulda_macros/test_unit'

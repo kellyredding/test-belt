@@ -1,9 +1,3 @@
-require 'rubygems'
-require 'test/unit'
-require 'shoulda'
-require 'useful/shoulda_macros/test_unit'
-require 'leftright'
-
 # Add test and lib paths to the $LOAD_PATH
 [ File.dirname(__FILE__),
   File.join(File.dirname(__FILE__), '..', 'lib')
@@ -12,6 +6,4 @@ require 'leftright'
   $LOAD_PATH.unshift(full_path) unless $LOAD_PATH.include?(full_path)
 end
 
-require 'test_it'
-
-# TODO: setup your test environment here
+require 'test_it/helper'
