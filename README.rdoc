@@ -2,19 +2,59 @@
 
 == Description
 
-Describe your gem here ... 
+This is a convenience gem I wrote to package up the most common testing tools and paradigms I use.  It is opinionated and custom to how I like to test.  It is designed to simplify the bringing in and distribution of modern testing practices to my various Ruby tools and libraries.
 
 == Installation
 
     gem install test-it
 
-== Usage
+TestIt only impacts your testing environment or setup.  Therefore, you should only every use it in one of a couple ways:
+ * Development Dependency
 
-    require 'test_it'
+    Gem::Specification.new do |s|
+      # your spec stuff ...
+
+      s.add_development_dependency("test-it")
+    end
+
+ * Gemfile test dependency
+
+    source 'http://rubygems.org'
+
+    # other gem dependencies ...
+
+    group :test do
+      gem 'test-it'
+
+      # other testing gems ...
+    end
+
+== Usage
+=== Test::Unit
+just write Test::Unit tests with assertions
+
+=== Leftright
+https://github.com/jordi/leftright
+
+you get these niceties for free
+
+=== Shoulda
+https://github.com/thoughtbot/shoulda
+
+=== Shoulda enhancements
+I've added some handy extensions to some things shoulda does.  None of these are required so just use them as you see fit.
+
+
+=== Automatic testing Rake tasks
+TestIt can provide an automatic set of rake tasks for testing subsets of your code base.  To use this first add this to your Rakefile:
+    TestIt::RakeTasks.new
+Now to see what this gives you:
+
+    $ rake -T
 
 == License
 
-Copyright (c) <year> <copyright holders>
+Copyright (c) 2010 Kelly D. Redding
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
