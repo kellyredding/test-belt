@@ -55,7 +55,7 @@ TestIt can provide an automatic set of rake tasks for testing subsets of your co
 
     require 'rubygems'
     require 'test_it/rake_tasks'
-    TestIt::RakeTasks.new      # this assumes your test files are located in /test
+    TestIt::RakeTasks.new      # this assumes your test files are located in /test  
 
 Now to see what this gives you:
 

@@ -21,7 +21,7 @@ module TestIt
         # in each top-level directory
         Dir.glob(File.join(path, "*/")).each do |test_dir|
           namespace File.basename(test_dir).to_s do
-            self.rake_tasks(test_dir)
+            self.tasks(test_dir)
           end
         end
       end
