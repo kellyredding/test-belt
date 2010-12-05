@@ -6,7 +6,7 @@ module TestIt::ShouldaMacros
     context "TestIt Shoulda Macros for files" do
 
       # should require a root path
-      before do
+      setup do
         @root_path = File.expand_path(File.dirname(__FILE__))
       end
 

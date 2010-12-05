@@ -48,6 +48,17 @@ https://github.com/thoughtbot/shoulda
 
 === Shoulda enhancements
 I've added some handy extensions to some things Shoulda does.  None of these are required so just use them as you see fit.
+* Classes macros:
+** should_have_class_methods
+** should_have_readers
+** etc
+* Files macros:
+** should_have_files
+** should_have_directories
+** etc
+* Context macros:
+** before/after aliases for setup/teardown
+** etc
 
 
 == Rake tasks for running tests
@@ -55,7 +66,7 @@ TestIt can provide an automatic set of rake tasks for testing subsets of your co
 
     require 'rubygems'
     require 'test_it/rake_tasks'
-    TestIt::RakeTasks.new      # this assumes your test files are located in /test  
+    TestIt::RakeTasks.new      # this assumes your test files are located in /test
 
 Now to see what this gives you:
 
