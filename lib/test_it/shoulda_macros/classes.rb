@@ -8,16 +8,9 @@ module TestIt::ShouldaMacros::Classes
     # Ripped from Shoulda::ActiveRecord::Macros
     def should_have_class_methods(*methods)
       get_options!(methods)
-      klass_name = described_type_name
       methods.each do |method|
         should "respond to class method ##{method}" do
-          klass ||= begin
-            # prefer subjects if specified
-            subject.class
-          rescue Exception => err
-            # described_type_name.constantize is the same as calling described_type
-            klass_name.constantize
-          end
+          klass = construct_subject.class
           assert_respond_to klass, method, "#{klass.name} does not have class method #{method}"
         end
       end
@@ -29,16 +22,9 @@ module TestIt::ShouldaMacros::Classes
     # Ripped from Shoulda::ActiveRecord::Macros
     def should_have_instance_methods(*methods)
       get_options!(methods)
-      klass_name = described_type_name
       methods.each do |method|
         should "respond to instance method ##{method}" do
-          the_subject = if subject
-            # prefer subject is specified
-            subject
-          else
-            # described_type_name.constantize is the same as calling described_type
-            klass_name.constantize.new
-          end
+          the_subject = construct_subject
           assert_respond_to(the_subject, method, "#{the_subject.class.name} does not have instance method #{method}")
         end
       end
@@ -70,11 +56,6 @@ module TestIt::ShouldaMacros::Classes
     end
     protected :should_have_accessors
   end
-
-  def described_type_name
-    self.name.gsub(/Test$/, '')
-  end
-  protected :described_type_name
 
 end
 

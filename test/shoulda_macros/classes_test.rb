@@ -4,12 +4,7 @@ require "test/fixtures/shoulda_macros/thing"
 class ClassesTest < Test::Unit::TestCase
 
   context "TestIt Shoulda Macros for classes" do
-    before do
-      @thing = Thing.new
-    end
-    subject {
-      @thing
-    }
+    subject { Thing.new }
 
     should_have_instance_methods :an_instance_meth
     should_have_class_methods :a_class_meth
