@@ -14,7 +14,9 @@ module TestIt::ShouldaMacros::Classes
       end
     end
   end
-  protected :should_have_class_methods
+  alias_method :should_have_class_method, :should_have_class_methods
+  protected :should_have_class_methods, :should_have_class_method
+
 
   # Ripped from Shoulda::ActiveRecord::Macros
   def should_have_instance_methods(*methods)
@@ -26,26 +28,33 @@ module TestIt::ShouldaMacros::Classes
       end
     end
   end
-  protected :should_have_instance_methods
+  alias_method :should_have_instance_method, :should_have_instance_methods
+  protected :should_have_instance_methods, :should_have_instance_method
+
 
   def should_have_readers(*readers)
     get_options!(readers)
     should_have_instance_methods *readers
   end
-  protected :should_have_readers
+  alias_method :should_have_reader, :should_have_readers
+  protected :should_have_readers, :should_have_reader
+
 
   def should_have_writers(*writers)
     get_options!(writers)
     should_have_instance_methods *(writers.collect{|w| "#{w}="})
   end
-  protected :should_have_writers
+  alias_method :should_have_writer, :should_have_writers
+  protected :should_have_writers, :should_have_writer
+
 
   def should_have_accessors(*accessors)
     get_options!(accessors)
     should_have_instance_methods *accessors
     should_have_instance_methods *(accessors.collect{|a| "#{a}="})
   end
-  protected :should_have_accessors
+  alias_method :should_have_accessor, :should_have_accessors
+  protected :should_have_accessors, :should_have_accessor
 
 end
 
