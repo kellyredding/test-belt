@@ -1,5 +1,4 @@
 require "test/helper"
-require "test_belt/test_unit/context"
 
 module TestBelt::TestUnit
 
