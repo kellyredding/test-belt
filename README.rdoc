@@ -31,7 +31,8 @@ TestBelt only impacts your testing environment or setup and is designed only for
 Using the TestBelt test helper loads in the testing libraries I like and use.  In your test files or a common test helper file, require in the helper:
     require 'test_belt/helper'
 
-This will give you the following:
+This will give you the following tools.  I use most of these helpers in testing this gem.  To see examples of these in action, peruse this gem's test files (https://github.com/kelredd/test-belt/tree/master/test) and run the test suite with:
+    $ rake test
 
 === Test::Unit
 just write Test::Unit tests with assertions
@@ -45,19 +46,23 @@ https://github.com/thoughtbot/shoulda
 === Shoulda enhancements
 I've added some handy macros and extensions to some things Shoulda does.  None of these are required so just use them as you see fit.  Here's a sampling of what is added:
 * Class interface macros:
-** should_have_class_methods
-** should_have_readers
-** etc
+ * should_have_class_methods
+ * should_have_readers
+ * etc
 * Files macros:
-** should_have_files
-** should_have_directories
-** etc
+ * should_have_files
+ * should_have_directories
+ * etc
 * Context macros:
-** before/after aliases for setup/teardown
-** etc
+ * before/after aliases for setup/teardown
+ * etc
 
-I use most of these helpers in testing this gem.  To see examples of these in action, peruse this gem's test files and run the test suite with:
-    $ rake test
+=== Additional Test::Unit context callbacks
+I've added some contexts callbacks in addition to the setup/teardown callbacks Shoulda provides:
+* setup_once / before_once - runs one time before any of the tests in the test case are run
+* teardown_once / after_once - runs one time after all of the tests in the test case are run
+* suite_started / on_suite_started - runs one time before any of the tests across the entire test suite are run
+* suite_finished / on_suite_finished - runs one time after all of the tests across the entire test suite are run
 
 == Rake tasks for running tests
 TestBelt can provide an automatic set of rake tasks for testing subsets of your code base.  These tasks are defined based on the structure of your test files.  To use this first add this to your Rakefile:
