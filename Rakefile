@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'rake/gempackagetask'
-require 'simple_gem/testtasks'
 
 require 'lib/test_it/version'
 
@@ -39,5 +38,5 @@ end
 task :default => :gem
 
 require 'lib/test_it/rake_tasks'
-TestIt::RakeTasks.new
+TestIt::RakeTasks.for :test
 
