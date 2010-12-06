@@ -1,10 +1,10 @@
 require "test/helper"
 require "test/fixtures/shoulda_macros/thing"
 
-module TestIt::ShouldaMacros
+module TestBelt::ShouldaMacros
   class ContextTest < Test::Unit::TestCase
 
-    context "TestIt Shoulda Macros for context" do
+    context "TestBelt Shoulda Macros for context" do
       setup do
         @thing = Thing.new
       end

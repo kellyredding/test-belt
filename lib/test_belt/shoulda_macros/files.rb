@@ -1,8 +1,8 @@
 require 'useful/ruby_extensions/string' unless String.new.respond_to?(:constantize)
 
-module TestIt; end
-module TestIt::ShouldaMacros; end
-module TestIt::ShouldaMacros::Files
+module TestBelt; end
+module TestBelt::ShouldaMacros; end
+module TestBelt::ShouldaMacros::Files
 
   def should_have_files(*files)
     the_files = files.flatten
@@ -28,4 +28,4 @@ module TestIt::ShouldaMacros::Files
 
 end
 
-Test::Unit::TestCase.extend(TestIt::ShouldaMacros::Files) if defined? Test::Unit::TestCase
+Test::Unit::TestCase.extend(TestBelt::ShouldaMacros::Files) if defined? Test::Unit::TestCase

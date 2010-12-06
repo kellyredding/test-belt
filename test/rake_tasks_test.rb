@@ -1,10 +1,10 @@
 require "test/helper"
-require 'lib/test_it/rake_tasks'
+require 'lib/test_belt/rake_tasks'
 
-module TestIt
+module TestBelt
   class RakeTasksTest < Test::Unit::TestCase
 
-    context "TestIt Rake Tasks" do
+    context "TestBelt Rake Tasks" do
 
       context "TestTask" do
         subject { RakeTasks::TestTask.new }

@@ -3,7 +3,7 @@ require "test/fixtures/shoulda_macros/thing"
 
 class ClassesTest < Test::Unit::TestCase
 
-  context "TestIt Shoulda Macros for classes" do
+  context "TestBelt Shoulda Macros for classes" do
     subject { Thing.new }
 
     should_have_instance_method :an_instance_meth

@@ -1,6 +1,6 @@
-module TestIt; end
-module TestIt::ShouldaMacros; end
-module TestIt::ShouldaMacros::Context
+module TestBelt; end
+module TestBelt::ShouldaMacros; end
+module TestBelt::ShouldaMacros::Context
 end
 
 
@@ -21,5 +21,5 @@ if defined? Shoulda::Context
     end
   end
 
-  Shoulda::Context.extend(TestIt::ShouldaMacros::Context)
+  Shoulda::Context.extend(TestBelt::ShouldaMacros::Context)
 end

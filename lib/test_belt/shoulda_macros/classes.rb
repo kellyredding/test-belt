@@ -1,8 +1,8 @@
 require 'useful/ruby_extensions/string' unless String.new.respond_to?(:constantize)
 
-module TestIt; end
-module TestIt::ShouldaMacros; end
-module TestIt::ShouldaMacros::Classes
+module TestBelt; end
+module TestBelt::ShouldaMacros; end
+module TestBelt::ShouldaMacros::Classes
 
   # Ripped from Shoulda::ActiveRecord::Macros
   def should_have_class_methods(*methods)
@@ -58,4 +58,4 @@ module TestIt::ShouldaMacros::Classes
 
 end
 
-Test::Unit::TestCase.extend(TestIt::ShouldaMacros::Classes) if defined? Test::Unit::TestCase
+Test::Unit::TestCase.extend(TestBelt::ShouldaMacros::Classes) if defined? Test::Unit::TestCase

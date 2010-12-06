@@ -1,9 +1,9 @@
 require "test/helper"
 
-module TestIt::ShouldaMacros
+module TestBelt::ShouldaMacros
   class FilesTest < Test::Unit::TestCase
 
-    context "TestIt Shoulda Macros for files" do
+    context "TestBelt Shoulda Macros for files" do
 
       # should require a root path
       setup do

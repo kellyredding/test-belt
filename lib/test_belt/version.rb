@@ -1,4 +1,4 @@
-module TestIt
+module TestBelt
   module Version
     
     MAJOR = 0

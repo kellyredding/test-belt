@@ -1,8 +1,8 @@
 require 'rake'
 require 'rake/tasklib'
 
-module TestIt; end
-module TestIt::RakeTasks
+module TestBelt; end
+module TestBelt::RakeTasks
 
   FILE_SUFFIX = "_test.rb"
 
