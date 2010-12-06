@@ -15,8 +15,8 @@ spec = Gem::Specification.new do |s|
   s.homepage         = 'http://github.com/kelredd/test-belt'
   s.files            = %w(README.rdoc Rakefile) + Dir.glob("{lib}/**/*")
 
-  s.add_dependency("shoulda", ["~> 2.10.0"])
-  s.add_dependency("leftright", ["~> 0.0.6"])
+  s.add_dependency("shoulda", ["~> 2.11"])
+  s.add_dependency("leftright", ["~> 0.9.0"])
   s.add_dependency("kelredd-useful", ["~> 0.4.0"])
 end
 
