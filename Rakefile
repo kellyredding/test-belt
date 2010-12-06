@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'rake/gempackagetask'
-
 require 'lib/test_belt/version'
 
 spec = Gem::Specification.new do |s|

@@ -47,7 +47,18 @@ module TestBelt::RakeTasks
 
   class << self
     def for(test_namespace = :test)
+      self.irb_task(test_namespace.to_s)
       self.to_tasks(test_namespace.to_s)
+    end
+
+    def irb_task(path)
+      env_file = File.join(path, "env.rb")
+      if File.exist?(env_file)
+        desc "Open irb preloaded with #{env_file}"
+        task :irb do
+          sh "irb -rubygems -r ./#{env_file}"
+        end
+      end
     end
 
     def to_tasks(path)
