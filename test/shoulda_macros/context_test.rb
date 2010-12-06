@@ -11,15 +11,15 @@ module TestIt::ShouldaMacros
 
       context "callbacks that setup/teardown each test" do
         before do
-          @thing.an_accessor = "before"
+          @thing.accessor1 = "before"
         end
         after do
-          assert_equal 'after', @thing.an_accessor, "the accessor was not set correctly in the after block"
+          assert_equal 'after', @thing.accessor1, "the accessor was not set correctly in the after block"
         end
 
         should "run using before/after blocks" do
-          assert_equal 'before', @thing.an_accessor, "the accessor was not set correctly in the before block"
-          @thing.an_accessor = "after"
+          assert_equal 'before', @thing.accessor1, "the accessor was not set correctly in the before block"
+          @thing.accessor1 = "after"
         end
       end
     end
