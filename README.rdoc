@@ -22,7 +22,7 @@ TestBelt only impacts your testing environment or setup and is designed only for
     # other gem dependencies ...
 
     group :test do
-      gem 'test-belt'
+      gem 'test-belt', :require => 'test_belt'
 
       # other testing gem dependencies ...
     end
@@ -63,6 +63,22 @@ I've added some contexts callbacks in addition to the setup/teardown callbacks S
 * teardown_once / after_once - runs one time after all of the tests in the test case are run
 * suite_started / on_suite_started - runs one time before any of the tests across the entire test suite are run
 * suite_finished / on_suite_finished - runs one time after all of the tests across the entire test suite are run
+
+=== Test::Unit 'skip' directive
+Test::Unit already provides a 'flunk' directive that will fail the current test.  I've added a 'skip' directive that will skip the test when running the suite.  I use it to ignore certain tests while I focus on others.  Skipping while using LeftRight allows me to ignore the test but not forget about it when looking at my test results.
+
+    class TestCaseTest < Test::Unit::TestCase
+
+      context "Something" do
+        should "be something awesome" do
+          skip
+          # anything after the 'skip' directive will not be executed
+          # => use skip(false) to not halt execution
+          assert something_is_in_fact_awesome
+        end
+      end
+
+    end
 
 == Generated Rake tasks
 === For running tests
