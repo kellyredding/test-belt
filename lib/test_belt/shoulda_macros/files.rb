@@ -21,10 +21,28 @@ module TestBelt::ShouldaMacros::Files
     end
   end
   protected :should_have_files
+  def skip_should_have_files(*files)
+    the_files = files.flatten
+    if the_files.empty?
+      should "(skip) have @root_path" do
+        skip
+      end
+    else
+      the_files.each do |file|
+        should "(skip) have the file '#{file}' in @root_path" do
+          skip
+        end
+      end
+    end
+  end
+  protected :skip_should_have_files
 
   alias_method :should_have_file, :should_have_files
   alias_method :should_have_directories, :should_have_files
   alias_method :should_have_directory, :should_have_files
+  alias_method :skip_should_have_file, :skip_should_have_files
+  alias_method :skip_should_have_directories, :skip_should_have_files
+  alias_method :skip_should_have_directory, :skip_should_have_files
 
 end
 

@@ -16,13 +16,20 @@ module TestBelt::ShouldaMacros
         assert self.class.respond_to?(:should_have_directory), "no :should_have_directory macro"
         assert self.class.respond_to?(:should_have_files), "no :should_have_files macro"
         assert self.class.respond_to?(:should_have_file), "no :should_have_file macro"
+
+        assert self.class.respond_to?(:skip_should_have_directories), "no :should_have_directories macro"
+        assert self.class.respond_to?(:skip_should_have_directory), "no :should_have_directory macro"
+        assert self.class.respond_to?(:skip_should_have_files), "no :should_have_files macro"
+        assert self.class.respond_to?(:skip_should_have_file), "no :should_have_file macro"
       end
 
       # should find the @root_path directory
       should_have_directories
+      skip_should_have_directories
 
       #should find files in the @root_path directory
       should_have_files 'files_test.rb'
+      skip_should_have_files 'files_test.rb'
     end
 
   end
