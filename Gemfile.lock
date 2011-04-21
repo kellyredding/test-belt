@@ -1,0 +1,23 @@
+PATH
+  remote: .
+  specs:
+    test-belt (0.2.1)
+      kelredd-useful (~> 0.4.0)
+      leftright (~> 0.9.0)
+      shoulda (~> 2.11)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    json (1.5.1)
+    kelredd-useful (0.4.1)
+      json
+    leftright (0.9.1)
+    shoulda (2.11.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0)
+  test-belt!
