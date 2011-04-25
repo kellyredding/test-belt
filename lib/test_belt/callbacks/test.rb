@@ -2,8 +2,9 @@ module TestBelt::Callbacks
   module Test
 
     # Test before/setup callbacks run before each test in the test case class.
-    # They do identical logic - they are just an alias of each other so use
-    # what reads better to you.
+    # The after/teardown callbacks run after each test in the test case class.
+    # Each pair does identical logic - they are just an alias of each other so
+    # use what reads better to you.
 
     # Usage:
     # <pre>
@@ -11,14 +12,18 @@ module TestBelt::Callbacks
     #     include TestBelt::Callbacks::Test
     #
     #     before {
+    #       # anything here runs before each test
     #       @before = 'before'
     #     }
+    #     after {
+    #       # anything here runs after each test
+    #     }
+    #
     #     should 'do stuff' do
     #       asser_equal 'before', @before
     #     end
     #   end
     # </pre>
-
 
     def self.included(receiver)
       receiver.send(:extend, ClassMethods)
