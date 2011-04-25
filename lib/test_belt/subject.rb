@@ -38,7 +38,7 @@ module TestBelt
     module InstanceMethods
       def subject
         @_testbelt_subject ||= if (sb = self.class._testbelt_subject)
-          sb.call
+          instance_eval(&sb)
         end
       end
     end

@@ -130,19 +130,21 @@ module TestBelt
       assert_equal 'new sub class subject', subject
     end
   end
-  # class ScopedSubjectTest < Test::Unit::TestCase
-  #   context "a test defining a before callback data that is used in it's subject"
-  #   before {
-  #     @setup_info = "my setup'd"
-  #   }
-  #   subject {
-  #     @setup_info + ' subject'
-  #   }
-  #
-  #   should "know it's subject" do
-  #     assert_equal "my setup'd subject", subject
-  #   end
-  # end
+  class ScopedSubjectTest < Test::Unit::TestCase
+    include TestBelt
+
+    context "a test defining a before callback data that is used in it's subject"
+    before {
+      @setup_info = "my setup'd"
+    }
+    subject {
+      @setup_info + ' subject'
+    }
+
+    should "know it's subject" do
+      assert_equal "my setup'd subject", subject
+    end
+  end
 
 
 

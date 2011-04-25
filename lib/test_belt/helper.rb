@@ -7,6 +7,7 @@ require 'test_belt/should'
 require 'test_belt/context'
 require 'test_belt/subject'
 require 'test_belt/skip'
+require 'test_belt/callbacks'
 
 module TestBelt
 
@@ -17,6 +18,7 @@ module TestBelt
       receiving_test_class.send(:include, Context)
       receiving_test_class.send(:include, Subject)
       receiving_test_class.send(:include, Skip)
+      receiving_test_class.send(:include, Callbacks)
     end
   end
 

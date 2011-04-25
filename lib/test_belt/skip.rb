@@ -1,3 +1,16 @@
+module Test::Unit
+  class TestCase
+
+    alias_method(:orig_add_error, :add_error)
+    def add_error(*args, &block)
+      unless args.first.kind_of?(::TestBelt::TestSkipped)
+        orig_add_error *args, &block
+      end
+    end
+
+  end
+end
+
 module TestBelt
   class TestSkipped < Exception; end
 
@@ -16,29 +29,12 @@ module TestBelt
     #    include TestBelt::Skip
     #  end
 
-    def self.included(receiver)
-      receiver.send(:alias_method, :orig_add_error, :add_error)
-
-      receiver.send(:extend, ClassMethods)
-      receiver.send(:include, InstanceMethods)
-    end
-
-    module ClassMethods
-      def add_error(*args, &block)
-        unless args.first.kind_of?(::TestBelt::TestSkipped)
-          orig_add_error *args, &block
-        end
+    def skip(halt_test=true)
+      if defined? ::LeftRight
+        ::LeftRight.state.skip = true
+        ::LeftRight.state.skipped_count += 1
       end
-    end
-
-    module InstanceMethods
-      def skip(halt_test=true)
-        if defined? ::LeftRight
-          ::LeftRight.state.skip = true
-          ::LeftRight.state.skipped_count += 1
-        end
-        raise ::TestBelt::TestUnit::TestSkipped if halt_test
-      end
+      raise ::TestBelt::TestSkipped if halt_test
     end
 
   end
