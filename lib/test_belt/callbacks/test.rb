@@ -36,6 +36,18 @@ module TestBelt::Callbacks
         ((begin; superclass._testbelt_setups; rescue NoMethodError; []; end) || []) +
         (@_testbelt_setups || [])
       end
+
+      def teardown(&block)
+        raise ArgumentError, "please provide a teardown block" unless block_given?
+        @_testbelt_teardowns ||= []
+        @_testbelt_teardowns << block
+      end
+      alias_method :after, :teardown
+
+      def _testbelt_teardowns
+        ((begin; superclass._testbelt_teardowns; rescue NoMethodError; []; end) || []) +
+        (@_testbelt_teardowns || [])
+      end
     end
 
   end

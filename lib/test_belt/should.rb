@@ -22,12 +22,10 @@ module TestBelt
 
       define_method(test_name) do
         begin
-          self.class._testbelt_setups.each do |sb|
-            instance_eval(&sb)
-          end
+          self.class._testbelt_setups.each {|sb| instance_eval(&sb)}
           instance_eval(&block)
         ensure
-          # TODO: teardown stuff
+          self.class._testbelt_teardowns.each {|tb| instance_eval(&tb)}
         end
       end
     end
