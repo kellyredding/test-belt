@@ -1,4 +1,5 @@
 require 'test_belt/callbacks/test'
+require 'test_belt/callbacks/case'
 
 module TestBelt::Callbacks
 
@@ -12,6 +13,7 @@ module TestBelt::Callbacks
   def self.included(receiving_test_class)
     if receiving_test_class.ancestors.include?(::Test::Unit::TestCase)
       receiving_test_class.send(:include, Test)
+      receiving_test_class.send(:include, Case)
     end
   end
 

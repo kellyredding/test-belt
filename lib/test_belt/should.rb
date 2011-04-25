@@ -25,7 +25,7 @@ module TestBelt
           self.class._testbelt_setups.each {|sb| instance_eval(&sb)}
           instance_eval(&block)
         ensure
-          self.class._testbelt_teardowns.each {|tb| instance_eval(&tb)}
+          self.class._testbelt_teardowns.reverse.each {|tb| instance_eval(&tb)}
         end
       end
     end

@@ -13,14 +13,13 @@ module TestBelt::Callbacks
     #
     #     before {
     #       # anything here runs before each test
-    #       @before = 'before'
     #     }
     #     after {
     #       # anything here runs after each test
     #     }
     #
     #     should 'do stuff' do
-    #       asser_equal 'before', @before
+    #       assert true
     #     end
     #   end
     # </pre>
