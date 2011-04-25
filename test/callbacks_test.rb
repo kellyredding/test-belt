@@ -5,7 +5,7 @@ module TestBelt
   class TestCallbacksTest < Test::Unit::TestCase
     include TestBelt
 
-    context "A test case test callbacks"
+    context "A test with callbacks"
     subject { 'subject' }
     before {
       @before = 'before'
@@ -18,7 +18,7 @@ module TestBelt
       @expected_teardown = 'teardown'
     }
 
-    should "run the test callbacks appropriately" do
+    should "run the it's callbacks appropriately" do
       assert_equal 'before', @before
       assert_equal 'setup', @setup
       assert_equal 'subject', @before_subject
@@ -39,8 +39,8 @@ module TestBelt
   class CaseCallbacksTest < Test::Unit::TestCase
     include TestBelt
 
-    context "A test case test callbacks"
-    subject { 'subject' }
+    context "A test with case callbacks"
+
     before_once {
       @expected_after = 'after'
       if (@@before_once rescue nil)
@@ -59,7 +59,7 @@ module TestBelt
     should "run the case callbacks just once" do
       assert true
     end
-    should "not run the case callbacks just more than once" do
+    should "not run the case callbacks more than once" do
       assert true
     end
 
@@ -87,4 +87,59 @@ module TestBelt
     }
   end
 
+
+
+
+  class SuiteCallbacksTest < Test::Unit::TestCase
+    include TestBelt
+
+    context "A test with suite callbacks"
+
+    suite_started {
+      @started_assert = true
+      @expected_finished = 'finished'
+      if (@@started rescue nil)
+        @started_fail = true
+      end
+      @@started = true
+    }
+    on_suite_started {
+      @on_started_assert = true
+      @expected_on_finished = 'on finished'
+      if (@@on_started rescue nil)
+        @on_started_fail = true
+      end
+      @@on_started = true
+    }
+
+    should "run the suite callbacks just once" do
+      assert true
+    end
+    should "not run the suite callbacks more than once" do
+      assert true
+    end
+
+    suite_finished {
+      if (@@finished rescue nil)
+        @finished_fail = true
+      end
+      @@finished = true
+      raise 'looks like suite_started did not run' unless @expected_finished == 'finished'
+      raise "suite_started did not run once" unless (@@started rescue nil)
+      raise "suite_started ran more than once" unless @started_fail.nil?
+      raise "suite_finished did not run once" unless (@@finished rescue nil)
+      raise "suite_finished ran more than once" unless @finished_fail.nil?
+    }
+    on_suite_finished {
+      if (@@on_finished rescue nil)
+        @on_finished_fail = true
+      end
+      @@on_finished = true
+      raise 'looks like on_suite_started did not run' unless @expected_on_finished == 'on finished'
+      raise "on_suite_started did not run once" unless (@@on_started rescue nil)
+      raise "on_suite_started ran more than once" unless @on_started_fail.nil?
+      raise "on_suite_finished did not run once" unless (@@on_finished rescue nil)
+      raise "on_suite_finished ran more than once" unless @on_finished_fail.nil?
+    }
+  end
 end

@@ -1,31 +1,3 @@
-module Test::Unit
-  class TestSuite
-    # override the TestSuite with TestCase callbacks
-    alias_method :run_without_testbelt_callbacks, :run
-
-    def run(*args, &block) # :nodoc:
-      if( !tests.empty? &&
-          (testclass = tests.first).kind_of?(::Test::Unit::TestCase) &&
-          testclass.class.ancestors.include?(::TestBelt::Callbacks::Case)
-        )
-        tests.first.class._testbelt_once_setups.each do |callback|
-          callback.call
-        end
-      end
-      run_without_testbelt_callbacks *args, &block
-      if( !tests.empty? &&
-          (testclass = tests.first).kind_of?(::Test::Unit::TestCase) &&
-          testclass.class.ancestors.include?(::TestBelt::Callbacks::Case)
-        )
-        tests.first.class._testbelt_once_teardowns.reverse.each do |callback|
-          callback.call
-        end
-      end
-    end
-
-  end
-end
-
 module TestBelt::Callbacks
   module Case
 
@@ -79,6 +51,34 @@ module TestBelt::Callbacks
       def _testbelt_once_teardowns
         ((begin; superclass._testbelt_once_teardowns; rescue NoMethodError; []; end) || []) +
         (@_testbelt_once_teardowns || [])
+      end
+    end
+
+  end
+end
+
+module Test::Unit
+  class TestSuite
+    # override the TestSuite with TestCase callbacks
+    alias_method :run_without_testbelt_callbacks, :run
+
+    def run(*args, &block) # :nodoc:
+      if( !tests.empty? &&
+          (testclass = tests.first).kind_of?(::Test::Unit::TestCase) &&
+          testclass.class.ancestors.include?(::TestBelt::Callbacks::Case)
+        )
+        tests.first.class._testbelt_once_setups.each do |callback|
+          callback.call
+        end
+      end
+      run_without_testbelt_callbacks *args, &block
+      if( !tests.empty? &&
+          (testclass = tests.first).kind_of?(::Test::Unit::TestCase) &&
+          testclass.class.ancestors.include?(::TestBelt::Callbacks::Case)
+        )
+        tests.first.class._testbelt_once_teardowns.reverse.each do |callback|
+          callback.call
+        end
       end
     end
 

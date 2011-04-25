@@ -1,5 +1,6 @@
 require 'test_belt/callbacks/test'
 require 'test_belt/callbacks/case'
+require 'test_belt/callbacks/suite'
 
 module TestBelt::Callbacks
 
@@ -14,6 +15,7 @@ module TestBelt::Callbacks
     if receiving_test_class.ancestors.include?(::Test::Unit::TestCase)
       receiving_test_class.send(:include, Test)
       receiving_test_class.send(:include, Case)
+      receiving_test_class.send(:include, Suite)
     end
   end
 
