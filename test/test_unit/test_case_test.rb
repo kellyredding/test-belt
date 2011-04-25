@@ -23,6 +23,8 @@ module TestBelt
     end
   end
 
+
+
   class ClassWithNoTestsTest < Test::Unit::TestCase
     include TestBelt
 
@@ -30,6 +32,8 @@ module TestBelt
     # no 'test_*' methods should not flunk
 
   end
+
+
 
   class ContextTest < Test::Unit::TestCase
     include TestBelt
@@ -83,6 +87,62 @@ module TestBelt
     end
   end
 
+
+
+  class SubjectTest < Test::Unit::TestCase
+    include TestBelt
+
+    context "a test defining it's subject"
+    subject {
+      'my subject'
+    }
+
+    should "know it's subject" do
+      assert_equal 'my subject', subject
+    end
+  end
+  class RootSubjectTest < Test::Unit::TestCase
+    include TestBelt
+
+    subject {
+      'root subject'
+    }
+
+  end
+  class SubclassOrigSubjectTest < RootSubjectTest
+    include TestBelt
+
+    context "a test subclassing a test with a root subject"
+
+    should "recognize the super class subject" do
+      assert_equal 'root subject', subject
+    end
+  end
+  class SubclassNewSubjectTest < RootSubjectTest
+    include TestBelt
+
+    context "a test subclassing a test with a root subject but defining it's own subject"
+    subject {
+      'new sub class subject'
+    }
+
+    should "recognize use it's subject over the super class subject" do
+      assert_equal 'new sub class subject', subject
+    end
+  end
+  # class ScopedSubjectTest < Test::Unit::TestCase
+  #   context "a test defining a before callback data that is used in it's subject"
+  #   before {
+  #     @setup_info = "my setup'd"
+  #   }
+  #   subject {
+  #     @setup_info + ' subject'
+  #   }
+  #
+  #   should "know it's subject" do
+  #     assert_equal "my setup'd subject", subject
+  #   end
+  # end
 
   # class SkipTest < Test::Unit::TestCase
   #

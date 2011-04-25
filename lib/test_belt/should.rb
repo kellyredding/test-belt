@@ -1,7 +1,7 @@
 module TestBelt
   module Should
 
-    # This defines a class method name 'should' that takes a string
+    # This defines a class method 'should' that takes a string
     # describing the test and a block that executes the test.  The
     # test will be named:
     #   "test: #{context} should #{description}."

@@ -1,8 +1,12 @@
 require "test/helper"
 
-module TestBelt::TestUnit
+module TestBelt
 
-  class ContextTest < Test::Unit::TestCase
+  class TestCaseContext < TestBelt::TestCase
+
+    def test_setup_once
+      
+    end
 
     suite_started do
       if @suite_started
