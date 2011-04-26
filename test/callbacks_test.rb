@@ -32,6 +32,33 @@ module TestBelt
       assert_equal 'teardown', @expected_teardown
     }
   end
+  class RootCallbacksTest < Test::Unit::TestCase
+    include TestBelt
+
+    before {
+      @before = ['root']
+    }
+    after {
+      assert_equal ['nested nested', 'nested'], @after
+    }
+  end
+  class NestedCallbacksTest < RootCallbacksTest
+    before {
+      @before << 'nested'
+    }
+    after {
+      @after << 'nested'
+    }
+  end
+  class NestedNestedCallbacksTest < NestedCallbacksTest
+    should "call it's nested callbacks in order" do
+      assert_equal ['root', 'nested'], @before
+    end
+
+    after {
+      @after = ['nested nested']
+    }
+  end
 
 
 
