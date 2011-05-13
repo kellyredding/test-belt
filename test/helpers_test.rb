@@ -6,7 +6,11 @@ module TestBelt
     include TestBelt
 
     define_method "test: should provide a 'should' method.  ".to_sym do
-      assert self.class.respond_to?(:should), "no :should method"
+      assert self.class.respond_to?(:should), "no #should method"
+    end
+
+    define_method "test: should provide a 'should_eventually' method for skipping tests.  ".to_sym do
+      assert self.class.respond_to?(:should_eventually), "no #should_eventually method"
     end
 
     define_method "test: should require a description and test block.  ".to_sym do
@@ -20,6 +24,26 @@ module TestBelt
 
     should "run this assertion" do
       assert true
+    end
+  end
+
+
+
+  class SkipTest < Test::Unit::TestCase
+    include TestBelt
+
+    context "Test Belt"
+
+    should "provide a skip assertion that uses LeftRight's skipping logic" do
+      assert_respond_to self, :skip, 'no skip method for the test case'
+      prev_skipped_count = ::LeftRight.state.skipped_count if defined? ::LeftRight
+      skip(false)
+      if defined? ::LeftRight
+        assert ::LeftRight.state.skip, 'left right is not in skip state for this case'
+        assert_equal prev_skipped_count+1, ::LeftRight.state.skipped_count, 'LeftRight\'s skip count was not incremented'
+        ::LeftRight.state.skip = false
+        ::LeftRight.state.skipped_count -= 1
+      end
     end
   end
 
@@ -147,23 +171,5 @@ module TestBelt
   end
 
 
-
-  class SkipTest < Test::Unit::TestCase
-    include TestBelt
-
-    context "Test Belt"
-
-    should "provide a skip assertion that uses LeftRight's skipping logic" do
-      assert_respond_to self, :skip, 'no skip method for the test case'
-      prev_skipped_count = ::LeftRight.state.skipped_count if defined? ::LeftRight
-      skip(false)
-      if defined? ::LeftRight
-        assert ::LeftRight.state.skip, 'left right is not in skip state for this case'
-        assert_equal prev_skipped_count+1, ::LeftRight.state.skipped_count, 'LeftRight\'s skip count was not incremented'
-        ::LeftRight.state.skip = false
-        ::LeftRight.state.skipped_count -= 1
-      end
-    end
-  end
 
 end
