@@ -1,6 +1,9 @@
 require 'test_belt/matchers/base'
 require 'test_belt/matchers/have_instance_methods'
 require 'test_belt/matchers/have_class_methods'
+require 'test_belt/matchers/have_readers'
+require 'test_belt/matchers/have_writers'
+require 'test_belt/matchers/have_accessors'
 
 module TestBelt::Matchers
 
@@ -11,6 +14,9 @@ module TestBelt::Matchers
     if receiving_test_class.ancestors.include?(::Test::Unit::TestCase)
       receiving_test_class.send(:include, HaveInstanceMethods)
       receiving_test_class.send(:include, HaveClassMethods)
+      receiving_test_class.send(:include, HaveReaders)
+      receiving_test_class.send(:include, HaveWriters)
+      receiving_test_class.send(:include, HaveAccessors)
     end
   end
 

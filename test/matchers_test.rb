@@ -15,12 +15,12 @@ module TestBelt::Matchers
     should have_class_method :a_class_meth
     should have_class_methods :class1, :class2
 
-    # should_eventually have_readers :reader1, :reader2
-    # should_eventually have_reader :reader3
-    # should_eventually have_writers :writer1, :writer2
-    # should_eventually have_writer :writer3
-    # should_eventually have_accessors :accessor1, :accessor2
-    # should_eventually have_accessor :accessor3
+    should have_readers :reader1, :reader2
+    should have_reader :reader3
+    should have_writers :writer1, :writer2
+    should have_writer :writer3
+    should have_accessors :accessor1, :accessor2
+    should have_accessor :accessor3
 
   end
 
