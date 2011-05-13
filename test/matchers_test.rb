@@ -22,12 +22,18 @@ module TestBelt::Matchers
     should have_accessors :accessor1, :accessor2
     should have_accessor :accessor3
 
+    should have_directory 'test'
+    should have_directories './test/fixtures'
+    should have_file 'test/fixtures/thing.rb'
+    should have_files './test/env.rb', './test/helper.rb'
   end
+
+
 
   class InstanceMethodsMatcherTest < Test::Unit::TestCase
     include TestBelt
 
-    context "the InstanceMethodsMatcher"
+    context "the HaveInstanceMethods matcher"
 
     should "take one string/symbol method argument" do
       [nil, 12, Object, [], {}].each do |arg|
@@ -62,10 +68,11 @@ module TestBelt::Matchers
   end
 
 
+
   class ClassMethodsMatcherTest < Test::Unit::TestCase
     include TestBelt
 
-    context "the ClassMethodsMatcher"
+    context "the HaveClassMethods matcher"
 
     should "take one string/symbol method argument" do
       [nil, 12, Object, [], {}].each do |arg|
@@ -96,5 +103,33 @@ module TestBelt::Matchers
       end
     end
   end
+
+
+
+  class HaveFilesMatcherTest < Test::Unit::TestCase
+    include TestBelt
+
+    context "the HaveFiles matcher"
+
+    should "match on file paths that exist" do
+      assert HaveFiles::Matcher.new('./test/fixtures/').matches?(subject)
+      assert HaveFiles::Matcher.new('test/fixtures/thing.rb').matches?(subject)
+    end
+
+    should "not match on file paths that do not exist" do
+      assert !HaveFiles::Matcher.new('./test/no_exist').matches?(subject)
+      assert !HaveFiles::Matcher.new('test/fixtures/no_exist.file').matches?(subject)
+    end
+
+    # should provide these macros
+    should "provide a set of macros" do
+      assert self.class.respond_to?(:have_directories), "no :should_have_directories macro"
+      assert self.class.respond_to?(:have_directory), "no :should_have_directory macro"
+      assert self.class.respond_to?(:have_files), "no :should_have_files macro"
+      assert self.class.respond_to?(:have_file), "no :should_have_file macro"
+    end
+  end
+
+
 
 end

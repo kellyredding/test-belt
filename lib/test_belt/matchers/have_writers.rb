@@ -10,13 +10,21 @@ module TestBelt::Matchers
     module ClassMethods
       def have_writers(*meths)
         meths.collect do |meth|
-          Matcher.new("#{meth}=")
+          Matcher.new(meth)
         end
       end
       alias_method :have_writer, :have_writers
     end
 
-    class Matcher < ::TestBelt::Matchers::HaveInstanceMethods::Matcher; end
+    class Matcher < ::TestBelt::Matchers::HaveInstanceMethods::Matcher
+      def initialize(method)
+        super("#{method}=")
+      end
+
+      def method_type
+        "writer"
+      end
+    end
 
   end
 end

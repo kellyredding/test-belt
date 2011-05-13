@@ -16,7 +16,11 @@ module TestBelt::Matchers
       alias_method :have_reader, :have_readers
     end
 
-    class Matcher < ::TestBelt::Matchers::HaveInstanceMethods::Matcher; end
+    class Matcher < ::TestBelt::Matchers::HaveInstanceMethods::Matcher
+      def method_type
+        "reader"
+      end
+    end
 
   end
 end

@@ -4,6 +4,7 @@ require 'test_belt/matchers/have_class_methods'
 require 'test_belt/matchers/have_readers'
 require 'test_belt/matchers/have_writers'
 require 'test_belt/matchers/have_accessors'
+require 'test_belt/matchers/have_files'
 
 module TestBelt::Matchers
 
@@ -17,6 +18,7 @@ module TestBelt::Matchers
       receiving_test_class.send(:include, HaveReaders)
       receiving_test_class.send(:include, HaveWriters)
       receiving_test_class.send(:include, HaveAccessors)
+      receiving_test_class.send(:include, HaveFiles)
     end
   end
 

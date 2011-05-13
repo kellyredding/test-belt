@@ -22,8 +22,12 @@ module TestBelt::Matchers
         @method = method
       end
 
+      def method_type
+        "instance method"
+      end
+
       def desc
-        "respond to instance method ##{@method}"
+        "respond to #{method_type} ##{@method}"
       end
 
       def matches?(subject)
