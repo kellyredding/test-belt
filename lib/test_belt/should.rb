@@ -61,11 +61,11 @@ module TestBelt
     end
 
     def should_context
-      ''  # TODO: context stuff needs to be added to test name
+      _testbelt_contexts
     end
 
     def should_test_name(context, name)
-      test_name = ["test:", "should", "#{name}.  "].flatten.join(' ').to_sym
+      test_name = ["test:", context, "should", "#{name}.  "].compact.flatten.join(' ').to_sym
       if instance_methods.include?(test_name.to_s)
         warn "  * WARNING: '#{test_name}' is already defined"
       end
