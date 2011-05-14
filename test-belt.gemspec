@@ -18,8 +18,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency("bundler", ["~> 1.0"])
-
-  s.add_dependency("shoulda", ["~> 2.11"])
   s.add_dependency("leftright", ["~> 0.9.0"])
-  s.add_dependency("kelredd-useful", ["~> 0.4.0"])
 end
