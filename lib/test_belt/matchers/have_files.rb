@@ -25,12 +25,10 @@ module TestBelt::Matchers
         "have the file path '#{@file_path}'"
       end
 
-      def matches?(subject)
-        File.exists?(@file_path)
-      end
-
-      def fail_message
-        "'#{@file}' does not exist"
+      def test
+        using(@file_path) do |path|
+          assert File.exists?(path), "'#{path}' does not exist"
+        end
       end
     end
 

@@ -26,13 +26,10 @@ module TestBelt::Matchers
         "respond to class method ##{@method}"
       end
 
-      def matches?(subject)
-        @subject = subject
-        subject.class.respond_to?(@method)
-      end
-
-      def fail_message
-        "#{@subject.class.name} does not have the class method ##{@method}"
+      def test
+        using(@method) do |method|
+          assert subject.class.respond_to?(method), "#{subject.class.name} does not have the class method ##{method}"
+        end
       end
     end
 

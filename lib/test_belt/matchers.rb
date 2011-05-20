@@ -23,7 +23,7 @@ module TestBelt::Matchers
   end
 
   def assert_matcher(matcher)
-    assert_block(matcher.fail_message) { matcher.matches?(subject) }
+    instance_exec(*matcher.args, &matcher.test)
   end
 
 end

@@ -22,21 +22,18 @@ module TestBelt::Matchers
         @method = method
       end
 
-      def method_type
-        "instance method"
-      end
-
       def desc
         "respond to #{method_type} ##{@method}"
       end
 
-      def matches?(subject)
-        @subject = subject
-        subject.respond_to?(@method)
+      def test
+        using(@method) do |method|
+          assert subject.respond_to?(method), "#{subject.class.name} does not have instance method ##{method}"
+        end
       end
 
-      def fail_message
-        "#{@subject.class.name} does not have instance method ##{@method}"
+      def method_type
+        "instance method"
       end
     end
 

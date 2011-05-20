@@ -34,6 +34,16 @@ module TestBelt::Matchers
     include TestBelt
 
     context "the HaveInstanceMethods matcher"
+    subject {
+      class InstanceMethodsTest
+        def meth1
+          'meth1'
+        end
+
+        attr_reader :meth2
+      end
+      InstanceMethodsTest.new
+    }
 
     should "take one string/symbol method argument" do
       [nil, 12, Object, [], {}].each do |arg|
@@ -48,21 +58,9 @@ module TestBelt::Matchers
       end
     end
 
-    should "match things with the expected instance method" do
-      {
-        :meth1 => (class Test1; def meth1; 'meth1'; end; end; Test1.new),
-        'meth2' => (class Test2; attr_reader :meth2; end; Test2.new)
-      }.each do |meth, subject|
-        assert HaveInstanceMethods::Matcher.new(meth).matches?(subject)
-      end
-    end
-
-    should "not match things without the expected instance methods" do
-      {
-        :meth3 => (class Test3; def meth1; 'meth1'; end; end; Test3.new),
-        'meth1' => (class Test4; attr_reader :meth2; end; Test4.new)
-      }.each do |meth, subject|
-        assert !HaveInstanceMethods::Matcher.new(meth).matches?(subject)
+    should "assert an expected instance method is present on the subject" do
+      [:meth1, 'meth2'].each do |meth|
+        assert_matcher HaveInstanceMethods::Matcher.new(meth)
       end
     end
   end
@@ -73,6 +71,16 @@ module TestBelt::Matchers
     include TestBelt
 
     context "the HaveClassMethods matcher"
+    subject {
+      class ClassMethodsTest
+        def self.meth1
+          'meth1'
+        end
+
+        attr_reader :meth2
+      end
+      ClassMethodsTest.new
+    }
 
     should "take one string/symbol method argument" do
       [nil, 12, Object, [], {}].each do |arg|
@@ -87,19 +95,9 @@ module TestBelt::Matchers
       end
     end
 
-    should "match things with the expected class method" do
-      { :meth1 => (class Test1; def self.meth1; 'meth1'; end; end; Test1.new)
-      }.each do |meth, subject|
-        assert HaveClassMethods::Matcher.new(meth).matches?(subject)
-      end
-    end
-
-    should "not match things without the expected class methods" do
-      { :meth3 => (class Test3; def self.meth1; 'meth1'; end; end; Test3.new),
-        :meth2 => (class Test2; def meth2; 'meth2'; end; end; Test2.new),
-        'meth1' => (class Test4; attr_reader :meth2; end; Test4.new)
-      }.each do |meth, subject|
-        assert !HaveClassMethods::Matcher.new(meth).matches?(subject)
+    should "assert an expected class method is present on the subject" do
+      [:meth1].each do |meth, subject|
+        assert_matcher HaveClassMethods::Matcher.new(meth)
       end
     end
   end
@@ -111,22 +109,9 @@ module TestBelt::Matchers
 
     context "the HaveFiles matcher"
 
-    should "match on file paths that exist" do
-      assert HaveFiles::Matcher.new('./test/fixtures/').matches?(subject)
-      assert HaveFiles::Matcher.new('test/fixtures/thing.rb').matches?(subject)
-    end
-
-    should "not match on file paths that do not exist" do
-      assert !HaveFiles::Matcher.new('./test/no_exist').matches?(subject)
-      assert !HaveFiles::Matcher.new('test/fixtures/no_exist.file').matches?(subject)
-    end
-
-    # should provide these macros
-    should "provide a set of macros" do
-      assert self.class.respond_to?(:have_directories), "no :should_have_directories macro"
-      assert self.class.respond_to?(:have_directory), "no :should_have_directory macro"
-      assert self.class.respond_to?(:have_files), "no :should_have_files macro"
-      assert self.class.respond_to?(:have_file), "no :should_have_file macro"
+    should "assert an existing file path actually exists" do
+      assert_matcher HaveFiles::Matcher.new('./test/fixtures/')
+      assert_matcher HaveFiles::Matcher.new('test/fixtures/thing.rb')
     end
   end
 
