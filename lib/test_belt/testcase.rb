@@ -13,7 +13,6 @@ module TestBelt
     # end
 
     def self.included(receiver)
-      puts "INCLUDED!!!"
       receiver.send :extend, ClassMethods
     end
 
@@ -21,7 +20,6 @@ module TestBelt
 
       # based on Ruby 1.8.7 suite method
       def suite
-        puts "SUITE!!!!"
         puts self.inspect
         # this is the only thing I'm changing
         method_names = ::TestBelt::Utils.local_public_instance_methods(self)
