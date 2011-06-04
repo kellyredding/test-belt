@@ -9,7 +9,7 @@ module TestBelt::Utils
     context "the util"
     subject { Utils }
 
-    should have_class_method :local_public_instance_methods
+    should have_instance_method :local_public_instance_methods
   end
 
   class LocalMethodsTest < Test
