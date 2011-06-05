@@ -28,7 +28,7 @@ module TestBelt::Matchers
 
       def test
         using(@method) do |method|
-          assert subject.class.respond_to?(method), "#{subject.class.name} does not have the class method ##{method}"
+          assert subject.class.respond_to?(method, true), "#{subject.class.name} does not have the class method ##{method}"
         end
       end
     end
