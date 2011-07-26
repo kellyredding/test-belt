@@ -52,11 +52,11 @@ module TestBelt::RakeTasks
     end
 
     def irb_task(path)
-      env_file = File.join(path, "env.rb")
-      if File.exist?(env_file)
-        desc "Open irb preloaded with #{env_file}"
+      irb_file = File.join(path, "irb.rb")
+      if File.exist?(irb_file)
+        desc "Open irb preloaded with #{irb_file}"
         task :irb do
-          sh "irb -rubygems -r ./#{env_file}"
+          sh "irb -rubygems -r ./#{irb_file}"
         end
       end
     end

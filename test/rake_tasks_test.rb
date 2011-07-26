@@ -1,5 +1,5 @@
-require "test/helper"
-require 'lib/test_belt/rake_tasks'
+require "test_belt"
+require 'test_belt/rake_tasks'
 
 module TestBelt
   class RakeTasksTest < Test::Unit::TestCase

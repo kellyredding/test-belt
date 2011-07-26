@@ -1,5 +1,5 @@
-require "test/helper"
-require 'test/fixtures/inherited_stuff'
+require "test_belt"
+require 'fixtures/inherited_stuff'
 
 module TestBelt::Utils
 

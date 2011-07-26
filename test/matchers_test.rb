@@ -1,5 +1,5 @@
-require "test/helper"
-require 'test/fixtures/thing'
+require "test_belt"
+require 'fixtures/thing'
 
 module TestBelt::Matchers
 
@@ -25,7 +25,7 @@ module TestBelt::Matchers
     should have_directory 'test'
     should have_directories './test/fixtures'
     should have_file 'test/fixtures/thing.rb'
-    should have_files './test/env.rb', './test/helper.rb'
+    should have_files './test/irb.rb', './test/helper.rb'
   end
 
 

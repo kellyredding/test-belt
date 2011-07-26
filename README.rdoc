@@ -22,16 +22,20 @@ TestBelt only impacts your testing environment or setup and is designed only for
     # other gem dependencies ...
 
     group :test do
-      gem 'test-belt', :require => 'test_belt'
+      gem 'test-belt'
 
       # other testing gem dependencies ...
     end
 
 == Test Helpers
-Requiring test belt loads in the testing libraries I like and use.  In your test files or a common test helper file, require in test belt:
+Requiring test belt loads in the testing libraries I like and use.  First make sure all your tests are in a 'test' directory.  Then in your test files require in test belt:
     require 'test_belt'
 
-This will give you the following tools.  I use most of these helpers in testing this gem.  To see examples of these in action, peruse this gem's test files (https://github.com/kelredd/test-belt/tree/master/test) and run the test suite with:
+This does a few things for you:
+* adds your 'lib' and 'test' dirs to the $LOAD_PATH
+* requires in a 'test/helper' file if one exists
+
+In addition, it gives you the following tools.  I use most of these helpers in testing this gem.  To see examples of these in action, peruse this gem's test files (https://github.com/kelredd/test-belt/tree/master/test) and run the test suite with:
     $ rake test
 
 === Test::Unit
@@ -83,7 +87,7 @@ To see what this gives you:
     $ rake -T
 
 === IRB with your environment loaded
-Many times in developing code, I need to quickly load up IRB with my environment.  TestBelt will give you a rake task for doing that.  Simply create an env.rb file that loads your environment in your test file directory (/test for example).  See https://github.com/kelredd/test-belt/tree/master/test/env.rb and demo for this gem with:
+Many times in developing code, I need to quickly load up IRB with my environment.  TestBelt will give you a rake task for doing that.  Simply create an irb.rb file in your test file directory and have it require 'test_belt'.  See https://github.com/kelredd/test-belt/tree/master/test/irb.rb and demo for this gem with:
 
     $ rake irb
     > TestBelt
