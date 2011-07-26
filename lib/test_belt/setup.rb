@@ -68,7 +68,7 @@ module TestBelt
     # parent dir of caller named TEST_DIR
     def caller_root_path(caller_info)
       caller_dirname = File.expand_path(File.dirname(caller_info[0]))
-      if (test_dir_pos = caller_dirname.index(TEST_REGEX)) > 0
+      if (test_dir_pos = caller_dirname.index(TEST_REGEX)) && test_dir_pos > 0
         root_dir = caller_dirname[0..(test_dir_pos-1)]
       end
     end
